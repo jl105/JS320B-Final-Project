@@ -4,7 +4,7 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import './db';
-import { initializeApp } from 'firebase/app';
+// import { initializeApp } from 'firebase/app';
 
 const appConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
