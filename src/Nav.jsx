@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import firebase from 'firebase/compat/app';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import './db';
-import { initializeApp } from 'firebase/app';
+// import { initializeApp } from 'firebase/app';
 
  
 export default function Nav() {
