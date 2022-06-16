@@ -1,5 +1,6 @@
 import './App.css';
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
+import React from "react";
 import {Link, BrowserRouter, Routes, Route, useParams} from 'react-router-dom'
 import BirdProfile from './BirdProfile';
 // import birdList from './eBirdResponse.json'

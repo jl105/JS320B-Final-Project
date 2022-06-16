@@ -12,6 +12,7 @@ export default function BirdList() {
     const [error, setError] = useState(false);
     const [user, setUser] = useState(null);
 
+    
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged(user => {
             setUser(user);
