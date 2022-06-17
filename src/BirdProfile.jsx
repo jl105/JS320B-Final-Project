@@ -85,7 +85,7 @@ export default function JournalEntry() {
         <div>
             <h1>Bird Entry for {entry.speciesCode}</h1>
             <p>{entry.comName}</p>
-            <button onClick={onEdit}>Edit</button>
+            {/* <button onClick={onEdit}>Edit</button> */}
             <button onClick={onDelete}>Delete</button>
         </div>
     );
