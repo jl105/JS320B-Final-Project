@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 // import { collection, getDocs, onSnapshot, query, orderBy, deleteDoc, doc } from 'firebase/firestore';
-import { collection, onSnapshot, query, orderBy, deleteDoc, doc } from 'firebase/firestore';
+import { collection, onSnapshot, query, deleteDoc, doc } from 'firebase/firestore';
 import db from './db';
 import { Link } from 'react-router-dom';
 // import AddJournal from './AddJournal';
