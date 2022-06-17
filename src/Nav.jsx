@@ -12,14 +12,14 @@ export default function Nav() {
     const navigate = useNavigate();
     const uiConfig = {
         signInFlow: 'popup',
-        signInSuccessUrl: '/journal',
+        signInSuccessUrl: '/',
         signInOptions: [
             firebase.auth.GoogleAuthProvider.PROVIDER_ID
           ],
     }
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-            // console.log(user);
+            console.log(user);
             setUser(user);
         });
 
@@ -28,12 +28,7 @@ export default function Nav() {
 
     return (
         <div>
-            <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/birdlist">Bird List</Link></li>
-                <li><Link to="/birdlist/1">Bird Profile</Link></li>
-            </ul>
-            {user ? 
+                        {user ? 
             (<div>
                 <img src={user.photoURL} alt={user.displayName} />
                 <p>{user.displayName}</p>
@@ -47,6 +42,12 @@ export default function Nav() {
                    <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
                 </div>
             )}
+            <ul>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/birdlist">Bird List</Link></li>
+                <li><Link to="/birdlist/1" element={<birdProfile />}>Bird Profile</Link></li>
+            </ul>
+
         </div>
     );
 }

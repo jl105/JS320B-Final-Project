@@ -30,14 +30,15 @@ export default function BirdList() {
         if (!user) {
             return;
         }
+        console.log(user.uid);
         const entriesQuery = query(
-            collection(db, 'users', user.uid, 'birdList'),
-            orderBy('createdAt', 'desc')
+            collection(db, `users/${user.uid}/birdList`),
+            // orderBy('createdAt', 'desc')
         );
         const unsubscribe = onSnapshot(
             entriesQuery,
             snapshot => {
-                // console.log(snapshot.docs);
+                console.log(snapshot.docs);
                 setEntries(snapshot.docs);
                 setLoading(false);
             },
@@ -61,13 +62,13 @@ export default function BirdList() {
     }
     return (
         <div>
-            <h1>Journal</h1>
+            <h1>Bird List</h1>
             {/* <AddJournal /> */}
             {entries.map(abird => {
                 return (
-                    <div key={abird.id}>
-                        <p>{abird.data().abird}</p>
-                        <span><Link to={`/birdlist/${abird.id}`}>View</Link></span>
+                    <div key={abird.data().speciesCode}>
+                        <p>{abird.data().comName}</p>
+                        <span><Link to={`/birdProfile/${abird.id}`}>View</Link></span>
                         <span><button onClick={() => onDelete(abird.id)}>Delete</button></span>
                         <hr />
                     </div>
