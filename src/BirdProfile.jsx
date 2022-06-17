@@ -26,13 +26,20 @@ export default function JournalEntry() {
 
     const onDelete = async () => {
         setLoading(true);
-        await deleteDoc(doc(db, 'users', user.uid, 'birdList', entryId));
+        if (user) {
+            await deleteDoc(doc(db, 'users', user.uid, 'birdList', entryId));
+        } else {
+            await deleteDoc(doc(db, 'birdList', entryId));
+        }
         setLoading(false);
         navigate('/birdList');
     }
 
     const onEdit = async () => {
-        const entryRef = doc(db, 'users', user.uid, 'birdList', entryId);
+        let entryRef = doc(db, 'birdList', entryId);
+        if (user) {
+            entryRef = doc(db, 'users', user.uid, 'birdList', entryId);
+        }
         const newEntry = window.prompt('Edit your entry', entry.entry);
         if (!newEntry || entry.entry === newEntry) {
             return;
@@ -51,13 +58,9 @@ export default function JournalEntry() {
     }
 
     useEffect(() => {
-        // if (!user) {
-        //     return;
-        // }
-        
         let entryRef = doc(db, 'birdList', entryId);
         if (user) {
-            let entryRef = doc(db, 'users', user.uid, 'birdList', entryId);
+            entryRef = doc(db, 'users', user.uid, 'birdList', entryId);
         } 
 
         getDoc(entryRef).then(docSnap => {
