@@ -23,22 +23,25 @@ export default function BirdList() {
     }, []);
 
     const onDelete = (id) => {
-        deleteDoc(doc(db, 'users', user.uid, 'birdList', id));
+        if (user) {
+            deleteDoc(doc(db, 'users', user.uid, 'birdList', id));
+        } else {
+            deleteDoc(doc(db, 'birdList', id));
+        }
     }
 
     useEffect(() => {
-        if (!user) {
-            return;
-        }
-        console.log(user.uid);
-        const entriesQuery = query(
-            collection(db, `users/${user.uid}/birdList`),
-            // orderBy('createdAt', 'desc')
+        let entriesQuery = query(
+            collection(db, `/birdList`)
         );
-        const unsubscribe = onSnapshot(
+        if (user) {
+            entriesQuery = query(
+                collection(db, `users/${user.uid}/birdList`)
+            );
+        }
+    const unsubscribe = onSnapshot(
             entriesQuery,
             snapshot => {
-                console.log(snapshot.docs);
                 setEntries(snapshot.docs);
                 setLoading(false);
             },
@@ -68,7 +71,7 @@ export default function BirdList() {
                 return (
                     <div key={abird.data().speciesCode}>
                         <p>{abird.data().comName}</p>
-                        <span><Link to={`/birdProfile/${abird.id}`}>View</Link></span>
+                        <span><Link to={`/birdList/${abird.id}`}>View</Link></span>
                         <span><button onClick={() => onDelete(abird.id)}>Delete</button></span>
                         <hr />
                     </div>

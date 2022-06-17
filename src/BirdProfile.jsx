@@ -51,11 +51,15 @@ export default function JournalEntry() {
     }
 
     useEffect(() => {
-        if (!user) {
-            return;
-        }
+        // if (!user) {
+        //     return;
+        // }
         
-        const entryRef = doc(db, 'users', user.uid, 'birdList', entryId);
+        let entryRef = doc(db, 'birdList', entryId);
+        if (user) {
+            let entryRef = doc(db, 'users', user.uid, 'birdList', entryId);
+        } 
+
         getDoc(entryRef).then(docSnap => {
             setLoading(false);
             if (docSnap.exists()) {
@@ -76,8 +80,8 @@ export default function JournalEntry() {
 
     return (
         <div>
-            <h1>Bird Entry: {entryId}</h1>
-            <p>{entry.entry}</p>
+            <h1>Bird Entry for {entry.speciesCode}</h1>
+            <p>{entry.comName}</p>
             <button onClick={onEdit}>Edit</button>
             <button onClick={onDelete}>Delete</button>
         </div>
