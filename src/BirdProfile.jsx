@@ -1,4 +1,4 @@
-import { getDoc, doc, setDoc, deleteDoc } from 'firebase/firestore';
+import { getDoc, doc, deleteDoc } from 'firebase/firestore';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
