@@ -17,7 +17,6 @@ export default function JournalEntry() {
 
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-            console.log(user);
             setUser(user);
         });
 
@@ -33,28 +32,6 @@ export default function JournalEntry() {
         }
         setLoading(false);
         navigate('/birdList');
-    }
-
-    const onEdit = async () => {
-        let entryRef = doc(db, 'birdList', entryId);
-        if (user) {
-            entryRef = doc(db, 'users', user.uid, 'birdList', entryId);
-        }
-        const newEntry = window.prompt('Edit your entry', entry.entry);
-        if (!newEntry || entry.entry === newEntry) {
-            return;
-        }
-
-        setLoading(true);
-        await setDoc(
-            entryRef,
-            {entry: newEntry},
-            {merge: true}
-        )
-
-        const updatedDocSnap = await getDoc(entryRef);
-        setEntry(updatedDocSnap.data());
-        setLoading(false);
     }
 
     useEffect(() => {

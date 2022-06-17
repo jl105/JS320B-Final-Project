@@ -25,6 +25,7 @@ export default function Home() {
     return (
         <div>
             <h1>Home</h1>
+            <h6>I have both the authenticated and anonymous version of this app. Just click on "Bird List" to start</h6>
             <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
         </div>
     );

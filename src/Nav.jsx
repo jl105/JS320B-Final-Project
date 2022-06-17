@@ -5,8 +5,6 @@ import firebase from 'firebase/compat/app';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import './db';
 import BirdProfile from './BirdProfile';
-// import { initializeApp } from 'firebase/app';
-
  
 export default function Nav() {
     const [user, setUser] = useState(null);
@@ -20,7 +18,6 @@ export default function Nav() {
     }
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-            console.log(user);
             setUser(user);
         });
 
@@ -39,7 +36,10 @@ export default function Nav() {
                             <li><Link to="/birdlist/1" element={<BirdProfile />}>Bird Profile</Link></li>
                         </ul>
                     </td>
+                </tr>
+                <tr>
                     <td>
+                    <h6>I have both the authenticated and anonymous version of this app. Just click on "Bird List" to start</h6>
                         {user ? 
                         (<div>
                             <img src={user.photoURL} alt={user.displayName} />
